@@ -1,0 +1,460 @@
+            PART_A
+Q1.
+mysql>  create database EXAM;
+ERROR 1007 (HY000): Can't create database 'exam'; database exists
+mysql> use exam;
+Database changed
+mysql> create table client_master(clientno int primary key ,name varchar(20) not null,adress varchar(20) not null,cit varchar(20) not null,state varchar(20),bal_due varchar(30));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into client_master values(10,'UMURERWA aline','rulindo','rulindo','ruli','1000');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into client_master values(12,'UMUHIRE adolphe','kinyinya','kigali','kigali','5000');
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into client_master values(13,'UMUTONI ange','nyarugenge','kigali','kigali','7000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into client_master values(14,'angela donny','nyarugenge','kigali','kagarama','3000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into client_master values(15,'kabirigi kenny ','nyarugenge','kigali','RWANDA','3000');
+Query OK, 1 row affected (0.00 sec)
+mysql> update  client_master set state='kenya'where  clientno=12;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update  client_master set state='kenya'where  clientno=13;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update  client_master set state='RWANDA'where  clientno=14;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from client_master;
++----------+-----------------+------------+---------+---------+---------+
+| clientno | name            | adress     | cit     | state   | bal_due |
++----------+-----------------+------------+---------+---------+---------+
+|       10 | UMURERWA aline  | rulindo    | rulindo | BURUNDI | 1000    |
+|       12 | UMUHIRE adolphe | kinyinya   | kigali  | kenya   | 5000    |
+|       13 | UMUTONI ange    | nyarugenge | kigali  | kenya   | 7000    |
+|       14 | angela donny    | nyarugenge | kigali  | RWANDA  | 3000    |
+|       15 | kabirigi kenny  | nyarugenge | kigali  | RWANDA  | 3000    |
++----------+-----------------+------------+---------+---------+---------+
+5 rows in set (0.00 sec)
+Q2. mysql> select name from client_master where bal_due>5000;
++--------------+
+| name         |
++--------------+
+| UMUTONI ange |
++--------------+
+1 row in set (0.02 sec)
+Q3.
+mysql>  update  client_master set  bal_due='5100'where  clientno=12;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from  client_master;
++----------+-----------------+------------+---------+---------+---------+
+| clientno | name            | adress     | cit     | state   | bal_due |
++----------+-----------------+------------+---------+---------+---------+
+|       10 | UMURERWA aline  | rulindo    | rulindo | BURUNDI | 1000    |
+|       12 | UMUHIRE adolphe | kinyinya   | kigali  | kenya   | 5100    |
+|       13 | UMUTONI ange    | nyarugenge | kigali  | kenya   | 7000    |
+|       14 | angela donny    | nyarugenge | kigali  | RWANDA  | 3000    |
+|       15 | kabirigi kenny  | nyarugenge | kigali  | RWANDA  | 3000    |
++----------+-----------------+------------+---------+---------+---------+
+5 rows in set (0.00 sec)
+Q4.
+mysql> ALTER TABLE client_master RENAME client12;
+Query OK, 0 rows affected (0.03 sec)
+Q5.
+mysql> ALTER TABLE client12 RENAME COLUMN bal_due TO BALANCE;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+              PARTB
+Q6.
+A.mysql> create table DEPARTMENT(dep_no int primary key ,dep_name varchar(20) not null,dep_head varchar(20) not null,depstud_no varchar(20) not null, dep_courses varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table EMPLOYEES(EMPid int primary key ,emp_name varchar(20) not null,emp_salary varchar(20) not null,employ_field varchar(20) not null, work_hours varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+mysql> insert into  EMPLOYEES values(1,'angela donny','200$','finance','10h');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into  EMPLOYEES values(2,'UMUTONI ange','100$','marketting','5h');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into  EMPLOYEES values(3,'MAHORO danny','110$','marketting','5h');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into  EMPLOYEES values(4,'MAHORO gabby','210$','finance','7h');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into  EMPLOYEES values(5,'carine aline','300$','accounting','10h');
+Query OK, 1 row affected (0.00 sec)
+
+
+ 
+
+mysql> insert into  DEPARTMENT values(222,'finance','ntirenganya fidle','1000');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into  DEPARTMENT values(222,'finance','ntirenganya fidle','1000',eco&math);
+ERROR 1054 (42S22): Unknown column 'eco' in 'field list'
+mysql> insert into  DEPARTMENT values(222,'finance','ntirenganya fidle','1000','eco&math');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into  DEPARTMENT values(222,'marketting','Mgabo andlea','10300','eco&phy');
+ERROR 1062 (23000): Duplicate entry '222' for key 'department.PRIMARY'
+mysql>
+mysql> insert into  DEPARTMENT values(233,'marketting','Mgabo andlea','10300','eco&phy');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into  DEPARTMENT values(234,'business','mukamana angelique','2000','math&phy');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into  DEPARTMENT values(443,'phrumacy','umurerwa aline','2400','biology');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into  DEPARTMENT values(332,'governance','abasa donathie','300','healthgroup');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from DEPARTMENT;
++--------+------------+--------------------+------------+-------------+
+| dep_no | dep_name   | dep_head           | depstud_no | dep_courses |
++--------+------------+--------------------+------------+-------------+
+|    222 | finance    | ntirenganya fidle  | 1000       | eco&math    |
+|    233 | marketting | Mgabo andlea       | 10300      | eco&phy     |
+|    234 | business   | mukamana angelique | 2000       | math&phy    |
+|    443 | phrumacy   | umurerwa aline     | 2400       | biology     |
+|    332 | governance | abasa donathie     | 300        | healthgroup |
++--------+------------+--------------------+------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from  EMPLOYEES;
++-------+--------------+------------+--------------+------------+
+| EMPid | emp_name     | emp_salary | employ_field | work_hours |
++-------+--------------+------------+--------------+------------+
+|     1 | angela donny | 200$       | finance      | 10h        |
+|     2 | UMUTONI ange | 100$       | marketting   | 5h         |
+|     3 | MAHORO danny | 110$       | marketting   | 5h         |
+|     4 | MAHORO gabby | 210$       | finance      | 7h         |
+|     5 | carine aline | 300$       | accounting   | 10h        |
++-------+--------------+------------+--------------+------------+
+5 rows in set (0.00 sec)
+B.mysql> desc EMPLOYEES;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| EMPid        | int         | NO   | PRI | NULL    |       |
+| emp_name     | varchar(20) | NO   |     | NULL    |       |
+| emp_salary   | varchar(20) | NO   |     | NULL    |       |
+| employ_field | varchar(20) | NO   |     | NULL    |       |
+| work_hours   | varchar(20) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+mysql> select*from EMPLOYEES;
++-------+--------------+------------+--------------+------------+--------+
+| EMPid | emp_name     | emp_salary | employ_field | work_hours | dep_no |
++-------+--------------+------------+--------------+------------+--------+
+|     1 | angela donny | 200$       | finance      | 10h        |    233 |
+|     2 | UMUTONI ange | 100$       | marketting   | 5h         |    222 |
+|     3 | MAHORO danny | 110$       | marketting   | 5h         |    234 |
+|     4 | MAHORO gabby | 210$       | finance      | 7h         |    222 |
+|     5 | carine aline | 300$       | accounting   | 10h        |    332 |
++-------+--------------+------------+--------------+------------+--------+
+5 rows in set (0.00 sec)
+5 rows in set (0.01 sec)
+mysql>  update   EMPLOYEES set dep_no=332 where EMPid=5;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  update   EMPLOYEES set dep_no=222 where EMPid=4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+c.select EMPLOYEES.emp_name,DEPARTMENT.dep_name 
+FROM employees 
+left JOIN DEPARTMENT 
+ON DEPARTMENT.dep_no = EMPLOYEES.dep_no
+
+d.select EMPLOYEES.emp_name,DEPARTMENT.dep_name 
+FROM employees 
+RIGHT JOIN DEPARTMENT 
+ON DEPARTMENT.dep_no = EMPLOYEES.dep_no
+
+e.SELECT *FROM EMPLOYEES
+WHERE emp_salary > (SELECT AVG(emp_salary) FROM EMPLOYEES);
+
+  Q7.
+
+mysql> create table student(studentid varchar(5) primary key ,fullnames varchar(25) not null,gender varchar(6) not null,age int(2) not null, department varchar(30));
+
+mysql> insert into student values('422467','Tumukunde Eric','Male','24','Accounting');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql>  insert into student values('342217','umuhire Celin','Male','27','Accounting');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql>  insert into student values('234267','Twizerimana Alexis','Male','25','BIT');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql>  insert into student values('34567','Umurerwa Aline','Female','19','Economics');
+Query OK, 1 row affected (0.00 sec)
+ 
+mysql> Select * from student;
++-----------+--------------------+--------+------+------------+
+| studentid | fullnames          | gender | age  | department |
++-----------+--------------------+--------+------+------------+
+| 34226     | Tumukunde Eric   | Male   |   24 | Accounting |
+| 34221     | umuhire Celin     | Male   |   27 | Accounting |
+| 13426     | Twizerimana Alexis | Male   |   25 | BIT        |
+| 34567     | Umurerwa Aline     | Female |   19 | Economics  |
++-----------+--------------------+--------+------+------------+
+4 rows in set (0.00 sec
+
+mysql> select * from student;
++-----------+--------------------+--------+------+------------+
+| studentid | fullnames          | gender | age  | department |
++-----------+--------------------+--------+------+------------+
+| 34226     | Tuyishimire Eric   | Male   |   23 | Accounting |
+| 34221     | Tuyizere Celin     | Male   |   27 | Accounting |
+| 13426     | Twizerimana Alexis | Male   |   25 | BIT        |
+| 34567     | Umurerwa Aline     | Female |   19 | Economics  |
++-----------+--------------------+--------+------+------------+
+4 rows in set (0.00 sec)
+
+A.mysql> select * from student;
++-----------+--------------------+--------+------+------------+
+| studentid | fullnames          | gender | age  | department |
++-----------+--------------------+--------+------+------------+
+| 34226     | Tuyishimire Eric   | Male   |   23 | Accounting |
+| 34221     | Tuyizere Celin     | Male   |   27 | Accounting |
+| 13426     | Twizerimana Alexis | Male   |   25 | BIT        |
+| 34567     | Umurerwa Aline     | Female |   19 | Economics  |
++-----------+--------------------+--------+------+------------+
+4 rows in set (0.00 sec)
+B.select *from student where gender=' Female';
+
+| studentid | fullnames          | gender | age  | department |
++-------------------------------------------------------------+
+| 34567     | Umurerwa Aline     | Female |   19 | Economics  |
++-------------------------------------------------------------+
+C.select *from student where gender='male'
++-----------+--------------------+--------+------+------------+
+| studentid | fullnames          | gender | age  | department |
++-----------+--------------------+--------+------+------------+
+| 34226     | Tuyishimire Eric   | Male   |   23 | Accounting |
+| 34221     | Tuyizere Celin     | Male   |   27 | Accounting |
+| 13426     | Twizerimana Alexis | Male   |   25 | BIT        |
++-------------------------------------------------------------+
+
+D.insert into student values('422467','UMUHOZA Eric','Male','24','Accounting')
+
+E.
+mysql> delete from student where age<20;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from student;
++-----------+--------------------+--------+------+------------+
+| studentid | fullnames          | gender | age  | department |
++-----------+--------------------+--------+------+------------+
+| 34226     | Tuyishimire Eric   | Male   |   23 | Accounting |
+| 34221     | Tuyizere Celin     | Male   |   27 | Accounting |
+| 13426     | Twizerimana Alexis | Male   |   25 | BIT        | |
++-----------+--------------------+--------+------+------------+
+4 rows in set (0.00 sec)
+
+
+
+      PARTC
+Q9
+mysql> create table Eemployees ( employee_ID int primary key , first_name varchar(50) , last_name varchar(50) , email varchar(40) , phone_number varchar(40) , hire_date varchar(30) , job_id int , salary int , commission_pct int , manager_id int , department_ID int )
+mysql> rename table eemployees to employees
+    -> ;
+
+mysql> desc employees
+    -> ;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| employee_ID    | int         | NO   | PRI | NULL    |       |
+| first_name     | varchar(50) | YES  |     | NULL    |       |
+| last_name      | varchar(50) | YES  |     | NULL    |       |
+| email          | varchar(40) | YES  |     | NULL    |       |
+| phone_number   | varchar(40) | YES  |     | NULL    |       |
+| hire_date      | varchar(30) | YES  |     | NULL    |       |
+| job_id         | int         | YES  |     | NULL    |       |
+| salary         | int         | YES  |     | NULL    |       |
+| commission_pct | int         | YES  |     | NULL    |       |
+| manager_id     | int         | YES  |     | NULL    |       |
+| department_ID  | int         | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+
+mysql> insert into employees values ( 1111 , 'vicent' , 'kamurase' , 
+mysql> insert into employees values ( 1111 , 'vicent' , 'kamurase' , 'kamurase@gmail.com' , '0788214764' , '2021-03-17' , 0012 , 100000 , 1000 , 100 , 1 );
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employees values ( 2222 , 'yves' , 'minani' , 'minani@gmail.com' , '0788364754' , '2021-03-27' , 0013 , 150000 , 1200 , 100 , 2 );
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values ( 3333 , 'allan' , 'rudasingwa' , 'rudasingwa@gmail.com' , '0799364750' , '2021-04-17' , 0014 , 120000 , 1200 , 101 ,3 );
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values ( 4444 , 'fidelle' , 'musabika' , 'musabika@gmail.com' , '0739364738' , '2021-05-20' , 0015 , 150000 , 1300 , 101 ,4 );
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into employees values ( 5555 , 'celebre' , 'ishimwe' , 'ishimwe@gmail.com' , '0789363890' , '2021-04-17' , 0016 , 120000 , 1200 , 100 ,5 );
+Query OK, 1 row affected (0.00 sec)
+mysql> select * from employees
+    -> ;
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| employee_ID | first_name | last_name  | email                | phone_number | hire_date  | job_id | salary | commission_pct | manager_id | department_ID |
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|        1111 | vicent     | kamurase   | kamurase@gmail.com   | 0788214764   | 2021-03-17 |     12 | 100000 |           1000 |        100 |             1 |
+|        2222 | yves       | minani     | minani@gmail.com     | 0788364754   | 2021-03-27 |     13 | 150000 |           1200 |        100 |             2 |
+|        3333 | allan      | rudasingwa | rudasingwa@gmail.com | 0799364750   | 2021-04-17 |     14 | 120000 |           1200 |        101 |             3 |
+|        4444 | fidelle    | musabika   | musabika@gmail.com   | 0739364738   | 2021-05-20 |     15 | 150000 |           1300 |        101 |             4 |
+|        5555 | celebre    | ishimwe    | ishimwe@gmail.com    | 0789363890   | 2021-04-17 |     16 | 120000 |           1200 |        100 |             5 |
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+
+
+mysql> select employee_ID , first_name ,  last_name , salary
+    -> from employees
++-------------+------------+------------+--------+
+| employee_ID | first_name | last_name  | salary |
++-------------+------------+------------+--------+
+|        1111 | vicent     | kamurase   | 100000 |
+|        2222 | yves       | minani     | 150000 |
+|        3333 | allan      | rudasingwa | 120000 |
+|        4444 | fidelle    | musabika   | 150000 |
+|        5555 | celebre    | ishimwe    | 120000 |
++-------------+------------+------------+--------+
+
+mysql> select * from employees
+    -> where manager_ID = 100
+    -> ;
++-------------+------------+-----------+--------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| employee_ID | first_name | last_name | email              | phone_number | hire_date  | job_id | salary | commission_pct | manager_id | department_ID |
++-------------+------------+-----------+--------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|        1111 | vicent     | kamurase  | kamurase@gmail.com | 0788214764   | 2021-03-17 |     12 | 100000 |           1000 |        100 |             1 |
+|        2222 | yves       | minani    | minani@gmail.com   | 0788364754   | 2021-03-27 |     13 | 150000 |           1200 |        100 |             2 |
+|        5555 | celebre    | ishimwe   | ishimwe@gmail.com  | 0789363890   | 2021-04-17 |     16 | 120000 |           1200 |        100 |             5 |
++-------------+------------+-----------+--------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+
+mysql> select * from employees
+mysql> select * from employees
+    -> where salary > 4800
+    -> ;
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| employee_ID | first_name | last_name  | email                | phone_number | hire_date  | job_id | salary | commission_pct | manager_id | department_ID |
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|        1111 | vicent     | kamurase   | kamurase@gmail.com   | 0788214764   | 2021-03-17 |     12 | 100000 |           1000 |        100 |             1 |
+|        2222 | yves       | minani     | minani@gmail.com     | 0788364754   | 2021-03-27 |     13 | 150000 |           1200 |        100 |             2 |
+|        3333 | allan      | rudasingwa | rudasingwa@gmail.com | 0799364750   | 2021-04-17 |     14 | 120000 |           1200 |        101 |             3 |
+|        4444 | fidelle    | musabika   | musabika@gmail.com   | 0739364738   | 2021-05-20 |     15 | 150000 |           1300 |        101 |             4 |
+|        5555 | celebre    | ishimwe    | ishimwe@gmail.com    | 0789363890   | 2021-04-17 |     16 | 120000 |           1200 |        100 |             5 |
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+
+
+mysql> update employees
+    -> set first_name = 'AUSTIN'
+    -> where employee_ID = 1111
+    -> ;
+mysql> select * from employees
+  -> where first_name = 'AUSTIN'
+    -> ;
++-------------+------------+-----------+--------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| employee_ID | first_name | last_name | email              | phone_number | hire_date  | job_id | salary | commission_pct | manager_id | department_ID |
++-------------+------------+-----------+--------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|        1111 | AUSTIN     | kamurase  | kamurase@gmail.com | 0788214764   | 2021-03-17 |     12 | 100000 |           1000 |        100 |             1 |
++-------------+------------+-----------+--------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+
+mysql> update employees
+    -> set department_ID = 60
+    -> where employee_ID = 2222
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employees
+    -> set department_ID = 70
+    -> where employee_ID = 3333
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> update employees
+    -> set department_ID = 80
+    -> where employee_ID = 5555
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employees
+    -> ;
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| employee_ID | first_name | last_name  | email                | phone_number | hire_date  | job_id | salary | commission_pct | manager_id | department_ID |
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|        1111 | AUSTIN     | kamurase   | kamurase@gmail.com   | 0788214764   | 2021-03-17 |     12 | 100000 |           1000 |        100 |             1 |
+|        2222 | yves       | minani     | minani@gmail.com     | 0788364754   | 2021-03-27 |     13 | 150000 |           1200 |        100 |            60 |
+|        3333 | allan      | rudasingwa | rudasingwa@gmail.com | 0799364750   | 2021-04-17 |     14 | 120000 |           1200 |        101 |            70 |
+|        4444 | fidelle    | musabika   | musabika@gmail.com   | 0739364738   | 2021-05-20 |     15 | 150000 |           1300 |        101 |             4 |
+|        5555 | celebre    | ishimwe    | ishimwe@gmail.com    | 0789363890   | 2021-04-17 |     16 | 120000 |           1200 |        100 |            80 |
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+
+mysql> select first_name , last_name
+    -> from employees
+    -> where department_ID in (60 , 70 , 80)
+    -> ;
++------------+------------+
+| first_name | last_name  |
++------------+------------+
+| yves       | minani     |
+| allan      | rudasingwa |
+| celebre    | ishimwe    |
++------------+------------+
+mysql> select * from employees
+    -> ;
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| employee_ID | first_name | last_name  | email                | phone_number | hire_date  | job_id | salary | commission_pct | manager_id | department_ID |
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|        1111 | AUSTIN     | kamurase   | kamurase@gmail.com   | 0788214764   | 2021-03-17 |     12 | 100000 |           1000 |        100 |             1 |
+|        2222 | yves       | minani     | minani@gmail.com     | 0788364754   | 2021-03-27 |     13 | 150000 |           1200 |        100 |            60 |
+|        3333 | allan      | rudasingwa | rudasingwa@gmail.com | 0799364750   | 2021-04-17 |     14 | 120000 |           1200 |        101 |            70 |
+|        4444 | fidelle    | musabika   | musabika@gmail.com   | 0739364738   | 2021-05-20 |     15 | 150000 |           1300 |        101 |             4 |
+|        5555 | celebre    | ishimwe    | ishimwe@gmail.com    | 0789363890   | 2021-04-17 |     16 | 120000 |           1200 |        100 |            80 |
++-------------+------------+------------+----------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+
+mysql> select first_name , last_name
+    -> from employees
+    -> where department_ID in (60 , 70 , 80)
+    -> ;
+ first_name | last_name  |
++------------+------------+
+| yves       | minani     |
+| allan      | rudasingwa |
+| celebre    | ishimwe    |
++------------+------------+
+
+Q10:
+
+ CREATE TABLE sales(sales_no int PRIMARY KEY,salesname varchar(250),branch varchar(250),salesamount int,DOB date);
+
+a. 
+INSERT INTO sales VALUES(100,"MUSONI","huye",1300000,"2005-01-01");
+INSERT INTO sales VALUES(101,"MISHAKE","kigali",23000000,"2002-01-01");
+INSERT INTO sales VALUES(102,"MUGAMBIRA","nyamagabe",10000000,"2005-01-01");
+INSERT INTO sales VALUES(103,"Rudasingwa","kampala",100000,"2000-01-01");
+INSERT INTO sales VALUES(104,"Eumenne","Musanze",500000,"2002-01-01");
+
+b.
+SELECT SUM(salesamount) FROM sales;
+
+c.
+select avg(salesamount)
+FROM sales;
+
+d.
+SELECT DATE_FORMAT(DOB, '%d/%m/%Y') AS formatted_date
+FROM sales;
+
+     
